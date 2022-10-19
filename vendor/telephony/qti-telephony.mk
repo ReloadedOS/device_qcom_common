@@ -30,7 +30,8 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.deprecated@1.0.vendor \
     android.hardware.secure_element@1.2.vendor \
     android.hardware.wifi.hostapd@1.0.vendor \
-    android.system.net.netd@1.1.vendor
+    android.system.net.netd@1.1.vendor \
+    libwpa_client 
 
 PRODUCT_VENDOR_PROPERTIES += \
     persist.radio.multisim.config=dsds \
