@@ -169,6 +169,10 @@ endif
 
 ifeq ($(call is-board-platform-in-list,$(QCOM_BOARD_PLATFORMS)),true)
 
+# Compatibility matrix
+DEVICE_MATRIX_FILE += \
+    device/qcom/vendor-common/compatibility_matrix.xml
+
 # Filesystem
 TARGET_FS_CONFIG_GEN += $(QCOM_COMMON_PATH)/config.fs
 
