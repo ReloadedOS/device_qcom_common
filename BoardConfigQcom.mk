@@ -18,6 +18,9 @@ TARGET_USES_AOSP_FOR_AUDIO ?= false
 TARGET_USES_QCOM_MM_AUDIO := true
 TARGET_USES_ION := true
 
+# Tell HALs that we're compiling an AOSP build with an in-line kernel
+TARGET_COMPILE_WITH_MSM_KERNEL := true
+
 # Enable Media Extensions for HAL1 on Legacy Devices
 ifeq ($(call is-board-platform-in-list, msm8937 msm8953 msm8996 msm8998 sdm660),true)
   TARGET_USES_MEDIA_EXTENSIONS := true
@@ -36,3 +39,11 @@ include device/qcom/sepolicy/SEPolicy.mk
 endif # !(8937 || 8953 || 8998 || 660)
 include device/qcom/common/sepolicy/SEPolicy.mk
 endif # Exclude QCOM SEPolicy
+
+# Enable QTI BT namespace if required
+ifeq ($(TARGET_USE_QTI_BT_STACK),true)
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/qcom/opensource/commonsys/packages/apps/Bluetooth \
+    vendor/qcom/opensource/commonsys/system/bt/conf \
+    vendor/qcom/opensource/commonsys/system/bt/main
+endif

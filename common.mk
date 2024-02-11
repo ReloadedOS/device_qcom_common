@@ -127,22 +127,31 @@ endif
 
 ifeq ($(call is-board-platform-in-list,$(6_1_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 6.1
+QCOM_HARDWARE_VARIANT := sm8650
 else ifeq ($(call is-board-platform-in-list,$(5_15_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 5.15
+QCOM_HARDWARE_VARIANT := sm8550
 else ifeq ($(call is-board-platform-in-list,$(5_10_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 5.10
+QCOM_HARDWARE_VARIANT := sm8450
 else ifeq ($(call is-board-platform-in-list,$(5_4_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 5.4
+QCOM_HARDWARE_VARIANT := sm8350
 else ifeq ($(call is-board-platform-in-list,$(4_19_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 4.19
+QCOM_HARDWARE_VARIANT := sm8250
 else ifeq ($(call is-board-platform-in-list,$(4_14_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 4.14
+QCOM_HARDWARE_VARIANT := sm8150
 else ifeq ($(call is-board-platform-in-list,$(4_9_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 4.9
+QCOM_HARDWARE_VARIANT := sdm845
 else ifeq ($(call is-board-platform-in-list,$(4_4_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 4.4
+QCOM_HARDWARE_VARIANT := msm8998
 else ifeq ($(call is-board-platform-in-list,$(3_18_FAMILY)),true)
 TARGET_KERNEL_VERSION ?= 3.18
+QCOM_HARDWARE_VARIANT := msm8996
 endif
 
 ifeq ($(call is-board-platform-in-list,$(QCOM_BOARD_PLATFORMS)),true)
@@ -160,6 +169,14 @@ endif
 
 # Opt out of 16K alignment changes
 PRODUCT_MAX_PAGE_SIZE_SUPPORTED ?= 4096
+
+# Set HAL pathmaps
+include $(QCOM_COMMON_PATH)/pathmap.mk
+
+$(call set-device-specific-path,AUDIO,audio,hardware/qcom/$(QCOM_HARDWARE_VARIANT)/audio)
+$(call set-device-specific-path,DISPLAY,display,hardware/qcom/$(QCOM_HARDWARE_VARIANT)/display)
+$(call set-device-specific-path,GPS,gps,hardware/qcom/$(QCOM_HARDWARE_VARIANT)/gps)
+$(call set-device-specific-path,MEDIA,media,hardware/qcom/$(QCOM_HARDWARE_VARIANT)/media)
 
 # Components
 include $(QCOM_COMMON_PATH)/components.mk
