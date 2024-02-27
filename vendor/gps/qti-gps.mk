@@ -23,6 +23,10 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
 # Inherit the GPS HAL.
 $(call inherit-product-if-exists, $(call project-path-for,qcom-gps)/gps_vendor_product.mk)
 
+# Manifest
+DEVICE_MANIFEST_FILE += \
+    $(QCOM_COMMON_PATH)/vendor/gps/qcc-manifest.xml
+
 # Overlays
 PRODUCT_PACKAGES += \
     QCOMGPSFrameworksOverlay
